@@ -119,10 +119,33 @@ class Calculadora {
     }
 
     processEqual() {
-        const operation = operacaoAnterior.innerText.split(" ")[1];
-
-        this.processarOperacoes(operation);
+        const operation = this.operacaoAnterior.innerText.slice(-1); // Obter a última operação
+        const valorAtual = parseFloat(this.operacaoAtual.innerText);
+    
+        let valorOperacao;
+    
+        switch (operation) {
+            case "+":
+                valorOperacao = parseFloat(this.operacaoAnterior.innerText) + valorAtual;
+                break;
+            case "-":
+                valorOperacao = parseFloat(this.operacaoAnterior.innerText) - valorAtual;
+                break;
+            case "*":
+                valorOperacao = parseFloat(this.operacaoAnterior.innerText) * valorAtual;
+                break;
+            case "/":
+                valorOperacao = parseFloat(this.operacaoAnterior.innerText) / valorAtual;
+                break;
+            default:
+                return;
+        }
+    
+        this.operacaoAnterior.innerText = "";
+        this.operacaoAtual.innerText = valorOperacao;
     }
+    
+    
 }
 
 const calc = new Calculadora(operacaoAnterior, operacaoAtual);
